@@ -1,3 +1,4 @@
+import movies from '../../state/movies';
 import MovieCard from '../movie-card/movie-card';
 
 /**
@@ -160,7 +161,11 @@ function Home(): JSX.Element {
 
           <div className="catalog__films-list">
             {
-              Array.from(Array(20)).map((_, index) => ( <MovieCard key={'movie'} /> ))
+              movies.map((movie) => (
+                <MovieCard
+                  key={`movie${movie.id}`}
+                  {...movie}
+                /> ))
             }
           </div>
 
