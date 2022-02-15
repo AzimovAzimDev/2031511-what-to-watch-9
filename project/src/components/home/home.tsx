@@ -3,13 +3,14 @@ import MovieCard from '../movie-card/movie-card';
 import SvgElement from '../svg-element/svg-element';
 import Logo from '../logo/logo';
 import {Footer} from '../footer/footer';
+import {MoviePageProps} from '../../types/MoviePage';
 
 /**
  * Главная страница
  *
  * @constructor
  */
-function Home(): JSX.Element {
+function Home(props: MoviePageProps): JSX.Element {
   return (
     <>
       <SvgElement/>
@@ -39,16 +40,19 @@ function Home(): JSX.Element {
         <div className="film-card__wrap">
           <div className="film-card__info">
             <div className="film-card__poster">
-              <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218"
+              <img
+                src={`img/${props.image}`}
+                alt={props.name}
+                width="218"
                 height="327"
               />
             </div>
 
             <div className="film-card__desc">
-              <h2 className="film-card__title">The Grand Budapest Hotel</h2>
+              <h2 className="film-card__title"> { props.name } </h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">Drama</span>
-                <span className="film-card__year">2014</span>
+                <span className="film-card__genre"> { props.genre } </span>
+                <span className="film-card__year"> { props.premiereDate } </span>
               </p>
 
               <div className="film-card__buttons">
