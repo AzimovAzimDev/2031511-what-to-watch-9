@@ -8,7 +8,7 @@ export default function Login () {
       <SvgElement/>
 
       <div className="user-page">
-        <Header/>
+        <Header title="Sign in"/>
 
         <div className="sign-in user-page__content">
           <form action="#" className="sign-in__form">
