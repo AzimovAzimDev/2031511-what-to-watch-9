@@ -1,4 +1,4 @@
-import Home from '../home/home';
+import Home from '../../pages/home/home';
 import {MoviePageProps} from '../../types/MoviePage';
 function App(props: MoviePageProps): JSX.Element {
   return (

@@ -1,8 +1,8 @@
 import movies from '../../state/movies';
-import MovieCard from '../movie-card/movie-card';
-import SvgElement from '../svg-element/svg-element';
-import Logo from '../logo/logo';
-import {Footer} from '../footer/footer';
+import MovieCard from '../../components/movie-card/movie-card';
+import SvgElement from '../../components/svg-element/svg-element';
+import Logo from '../../components/logo/logo';
+import {Footer} from '../../components/footer/footer';
 import {MoviePageProps} from '../../types/MoviePage';
 
 /**
