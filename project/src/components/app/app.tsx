@@ -1,12 +1,8 @@
 import Home from '../home/home';
-function App(): JSX.Element {
+import {MoviePageProps} from '../../types/MoviePage';
+function App(props: MoviePageProps): JSX.Element {
   return (
-    <Home
-      name="The Grand Budapest Hotel"
-      genre="Drama"
-      premiereDate="2014"
-      image="the-grand-budapest-hotel-poster.jpg"
-    />);
+    <Home { ...props } />);
 }
 
 export default App;
