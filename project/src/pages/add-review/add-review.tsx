@@ -1,6 +1,17 @@
 import SvgElement from '../../components/svg-element/svg-element';
+import {Navigate, useParams} from 'react-router-dom';
+import movies from '../../mocks/movies';
 
 export default function AddReview () {
+  const {id} = useParams();
+  const movie = movies.find((element) => element.id === Number(id));
+
+  if (!movie) {
+    return <Navigate to="404" />;
+  }
+
+  const thumbnail = `img/${movie.image}`;
+
   return (
     <>
       <SvgElement/>
@@ -8,7 +19,7 @@ export default function AddReview () {
       <section className="film-card film-card--full">
         <div className="film-card__header">
           <div className="film-card__bg">
-            <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel"/>
+            <img src={thumbnail} alt={movie.name}/>
           </div>
 
           <h1 className="visually-hidden">WTW</h1>
@@ -25,7 +36,7 @@ export default function AddReview () {
             <nav className="breadcrumbs">
               <ul className="breadcrumbs__list">
                 <li className="breadcrumbs__item">
-                  <a href="film-page.html" className="breadcrumbs__link">The Grand Budapest Hotel</a>
+                  <a href="film-page.html" className="breadcrumbs__link">{movie.name}</a>
                 </li>
                 <li className="breadcrumbs__item">
                   <a className="breadcrumbs__link">Add review</a>
@@ -47,8 +58,8 @@ export default function AddReview () {
 
           <div className="film-card__poster film-card__poster--small">
             <img
-              src="img/the-grand-budapest-hotel-poster.jpg"
-              alt="The Grand Budapest Hotel poster" width="218"
+              src={thumbnail}
+              alt={movie.name}
               height="327"
             />
           </div>
