@@ -1,6 +1,6 @@
 import SvgElement from '../../components/svg-element/svg-element';
 
-export default function Index () {
+export default function AddReview () {
   return (
     <>
       <SvgElement/>

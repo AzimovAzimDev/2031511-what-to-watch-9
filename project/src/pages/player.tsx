@@ -1,10 +1,9 @@
-import SvgElement from '../../components/svg-element/svg-element';
+import SvgElement from '../components/svg-element/svg-element';
 
-export default function Index () {
-  return (
+export default function Player() {
+  return(
     <>
       <SvgElement/>
-
       <div className="player">
         <video src="#" className="player__video" poster="img/player-poster.jpg"></video>
 
@@ -37,5 +36,6 @@ export default function Index () {
           </div>
         </div>
       </div>
-    </>);
+    </>
+  );
 }

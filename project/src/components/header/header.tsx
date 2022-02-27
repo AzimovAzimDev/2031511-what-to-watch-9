@@ -6,7 +6,7 @@ export default function Header (props: HeaderProps) {
     <header className="page-header user-page__head">
       <Logo/>
       <h1 className="page-title user-page__title"> { props.title } </h1>
-      ( { props.isLogined && (
+      { props.isLogined && (
         <ul className="user-block">
           <li className="user-block__item">
             <div className="user-block__avatar">
@@ -16,6 +16,6 @@ export default function Header (props: HeaderProps) {
           <li className="user-block__item">
             <a className="user-block__link">Sign out</a>
           </li>
-        </ul>) })
+        </ul>) }
     </header>);
 }
