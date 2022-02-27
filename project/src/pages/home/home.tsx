@@ -1,9 +1,8 @@
-import movies from '../../state/movies';
-import MovieCard from '../../components/movie-card/movie-card';
 import SvgElement from '../../components/svg-element/svg-element';
 import {Footer} from '../../components/footer/footer';
 import {MoviePageProps} from '../../types/MoviePage';
 import Header from '../../components/header/header';
+import {MovieList} from '../../components/movie-list/movie-list';
 
 /**
  * Главная страница
@@ -98,15 +97,7 @@ function Home(props: MoviePageProps): JSX.Element {
             </li>
           </ul>
 
-          <div className="catalog__films-list">
-            {
-              movies.map((movie) => (
-                <MovieCard
-                  key={`movie${movie.id}`}
-                  {...movie}
-                /> ))
-            }
-          </div>
+          <MovieList list={props.list}/>
 
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>

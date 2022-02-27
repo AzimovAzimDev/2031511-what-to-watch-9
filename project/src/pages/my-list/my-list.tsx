@@ -2,7 +2,7 @@ import SvgElement from '../../components/svg-element/svg-element';
 import Header from '../../components/header/header';
 import {Footer} from '../../components/footer/footer';
 import {MovieList} from '../../components/movie-list/movie-list';
-import movies from '../../state/movies';
+import movies from '../../mocks/movies';
 
 export default function MyList () {
   return (

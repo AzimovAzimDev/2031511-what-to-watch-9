@@ -15,7 +15,7 @@ import {MoviePageProps} from '../../types/MoviePage';
 function App(props: MoviePageProps): JSX.Element {
   return (
     <Routes>
-      <Route index element={<Home {...mainPageProps} />} />
+      <Route index element={<Home {...mainPageProps} list={props.list} />} />
       <Route path={routes.login.path} element={<Login/>} />
       <Route path={routes.myList.path} element={<PrivateRoute><MyList/></PrivateRoute>} />
       <Route path={routes.movie.name} >

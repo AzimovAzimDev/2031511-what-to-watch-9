@@ -1,7 +1,7 @@
 import SvgElement from '../../components/svg-element/svg-element';
 import Header from '../../components/header/header';
 import {Footer} from '../../components/footer/footer';
-import movies from '../../state/movies';
+import movies from '../../mocks/movies';
 import MovieCard from '../../components/movie-card/movie-card';
 
 export default function Movie () {
