@@ -6,8 +6,6 @@ import {MovieList} from '../../components/movie-list/movie-list';
 
 /**
  * Главная страница
- *
- * @constructor
  */
 function Home(props: MoviePageProps): JSX.Element {
   return (

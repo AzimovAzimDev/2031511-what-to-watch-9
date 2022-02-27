@@ -7,7 +7,7 @@ import Login from '../../pages/login/login';
 import MyList from '../../pages/my-list/my-list';
 import Movie from '../../pages/movie/movie';
 import AddReview from '../../pages/add-review/add-review';
-import Player from '../../pages/player';
+import Player from '../../pages/player/player';
 import NotFound from '../../pages/not-found/not-found';
 import PrivateRoute from '../private/private';
 import {MoviePageProps} from '../../types/MoviePage';
