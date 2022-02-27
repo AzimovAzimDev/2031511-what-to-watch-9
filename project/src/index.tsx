@@ -9,6 +9,7 @@ import MyList from './pages/my-list/my-list';
 import Movie from './pages/movie/movie';
 import AddReview from './pages/add-review/add-review';
 import Player from './pages/player';
+import PrivateRoute from './components/private/private';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -16,7 +17,7 @@ ReactDOM.render(
       <Routes>
         <Route index element={<App {...mainPageProps} />} />
         <Route path="login" element={<Login/>} />
-        <Route path="mylist" element={<MyList/>} />
+        <Route path="mylist" element={<PrivateRoute><MyList/></PrivateRoute>} />
         <Route path="films">
           <Route path=":id" element={<Movie/>} />
           <Route path=":id/review" element={<AddReview/>} />
