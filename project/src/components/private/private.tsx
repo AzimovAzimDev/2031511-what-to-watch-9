@@ -1,4 +1,5 @@
 import {Navigate} from 'react-router-dom';
+import { login } from '../../routes/routes';
 
 /**
  * HOC Компонента для приватных старниц
@@ -6,5 +7,5 @@ import {Navigate} from 'react-router-dom';
  */
 export default function PrivateRoute({ children }: {children: JSX.Element}) {
   const auth = false;
-  return auth ? children : <Navigate to="/login" />;
+  return auth ? children : <Navigate to={login.path} />;
 }

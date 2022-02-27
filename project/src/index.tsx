@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
+import routes from './routes/routes';
 import mainPageProps from './state/main-page-props';
 import App from './components/app/app';
 import Login from './pages/login/login';
@@ -16,13 +17,13 @@ ReactDOM.render(
     <BrowserRouter>
       <Routes>
         <Route index element={<App {...mainPageProps} />} />
-        <Route path="login" element={<Login/>} />
-        <Route path="mylist" element={<PrivateRoute><MyList/></PrivateRoute>} />
-        <Route path="films">
-          <Route path=":id" element={<Movie/>} />
-          <Route path=":id/review" element={<AddReview/>} />
+        <Route path={routes.login.path} element={<Login/>} />
+        <Route path={routes.myList.path} element={<PrivateRoute><MyList/></PrivateRoute>} />
+        <Route path={routes.movie.name} >
+          <Route path={routes.movie.path} element={<Movie/>} />
+          <Route path={routes.review.path} element={<AddReview/>} />
         </Route>
-        <Route path="player/:id" element={<Player/>} />
+        <Route path={routes.player.path} element={<Player/>} />
         <Route path="*" element={<NotFound/>} />
       </Routes>
     </BrowserRouter>
