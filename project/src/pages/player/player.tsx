@@ -2,7 +2,7 @@ import SvgElement from '../../components/svg-element/svg-element';
 import {useParams, Navigate} from 'react-router-dom';
 import movies from '../../mocks/movies';
 
-export default function Player (props: any) {
+export default function Player () {
   const {id} = useParams();
   const movie = movies.find((element) => element.id === Number(id));
 

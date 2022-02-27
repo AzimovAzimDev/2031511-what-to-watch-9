@@ -3,18 +3,29 @@ import Header from '../../components/header/header';
 import {Footer} from '../../components/footer/footer';
 import movies from '../../mocks/movies';
 import MovieCard from '../../components/movie-card/movie-card';
+import {Link, Navigate, useParams} from 'react-router-dom';
+import {player} from '../../routes/routes';
 
 export default function Movie () {
+
+  const {id} = useParams();
+  const movie = movies.find((element) => element.id === Number(id));
+
+  if (!movie) {
+    return <Navigate to="404" />;
+  }
+
+  const poster = `img/${movie.image}`;
+
   return (
     <>
       <SvgElement/>
 
-      <Header title="My list"/>
 
       <section className="film-card film-card--full">
         <div className="film-card__hero">
           <div className="film-card__bg">
-            <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel"/>
+            <img src={poster} alt={movie.name}/>
           </div>
 
           <h1 className="visually-hidden">WTW</h1>
@@ -23,19 +34,21 @@ export default function Movie () {
 
           <div className="film-card__wrap">
             <div className="film-card__desc">
-              <h2 className="film-card__title">The Grand Budapest Hotel</h2>
+              <h2 className="film-card__title">{movie.name}</h2>
               <p className="film-card__meta">
                 <span className="film-card__genre">Drama</span>
                 <span className="film-card__year">2014</span>
               </p>
 
               <div className="film-card__buttons">
-                <button className="btn btn--play film-card__button" type="button">
-                  <svg viewBox="0 0 19 19" width="19" height="19">
-                    <use xlinkHref="#play-s"></use>
-                  </svg>
-                  <span>Play</span>
-                </button>
+                <Link to={player.buildRoute(movie.id)}>
+                  <button className="btn btn--play film-card__button" type="button">
+                    <svg viewBox="0 0 19 19" width="19" height="19">
+                      <use xlinkHref="#play-s"></use>
+                    </svg>
+                    <span>Play</span>
+                  </button>
+                </Link>
                 <button className="btn btn--list film-card__button" type="button">
                   <svg viewBox="0 0 19 20" width="19" height="20">
                     <use xlinkHref="#add"></use>
@@ -51,7 +64,7 @@ export default function Movie () {
         <div className="film-card__wrap film-card__translate-top">
           <div className="film-card__info">
             <div className="film-card__poster film-card__poster--big">
-              <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218"
+              <img src={poster} alt={movie.name} width="218"
                 height="327"
               />
             </div>
@@ -108,29 +121,16 @@ export default function Movie () {
 
           <div className="catalog__films-list">
             {
-              movies.slice(0, 4).map((movie) => (
+              movies.slice(0, 4).map((m) => (
                 <MovieCard
-                  key={`movie${movie.id}`}
-                  {...movie}
+                  key={`movie${m.id}`}
+                  {...m}
                 /> ))
             }
           </div>
         </section>
 
-        <footer className="page-footer">
-          <div className="logo">
-            <a href="main.html" className="logo__link logo__link--light">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
-          </div>
-
-          <div className="copyright">
-            <p>© 2019 What to watch Ltd.</p>
-          </div>
-        </footer>
+        <Footer/>
       </div>
-      <Footer/>
     </>);
 }

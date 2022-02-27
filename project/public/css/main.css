@@ -625,6 +625,7 @@ main {
       color: #D9CD8D; }
 
 .logo__letter {
+  text-decoration: none;
   font-size: 26px; }
   .logo__letter--1 {
     -webkit-transform: rotate(-9deg) translateY(5px);
