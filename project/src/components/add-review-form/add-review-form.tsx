@@ -1,4 +1,5 @@
 import { FormEventHandler, useState} from 'react';
+import {RatingStar} from '../rating-star/rating-star';
 
 /**
  * Maximum review points
@@ -55,28 +56,14 @@ export default function AddReviewForm() {
             {
               points.map((point, index) => {
                 const inputKey = `star-${index}`;
-                const labelKey = `star-label-${index}`;
 
                 return (
-                  <>
-                    <input
-                      key={inputKey}
-                      id={`star-${index}`}
-                      checked={point}
-                      value={index}
-                      name="rating"
-                      type="checkbox"
-                      className="rating__input"
-                      onChange={() => handleChange(index)}
-                    />
-                    <label
-                      key={labelKey}
-                      htmlFor={`star-${index}`}
-                      className="rating__label"
-                    >
-                      Rating {index}
-                    </label>
-                  </>
+                  <RatingStar
+                    key={inputKey}
+                    id={index}
+                    checked={point}
+                    onChange={handleChange}
+                  />
                 );
               })
             }
