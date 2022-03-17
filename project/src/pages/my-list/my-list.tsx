@@ -1,8 +1,8 @@
 import SvgElement from '../../components/svg-element/svg-element';
 import Header from '../../components/header/header';
 import {Footer} from '../../components/footer/footer';
-import movies from '../../state/movies';
-import MovieCard from '../../components/movie-card/movie-card';
+import {MovieList} from '../../components/movie-list/movie-list';
+import movies from '../../mocks/movies';
 
 export default function MyList () {
   return (
@@ -15,15 +15,7 @@ export default function MyList () {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-          <div className="catalog__films-list">
-            {
-              movies.map((movie) => (
-                <MovieCard
-                  key={`movie${movie.id}`}
-                  {...movie}
-                /> ))
-            }
-          </div>
+          <MovieList list={movies} />
         </section>
         <Footer/>
       </div>
