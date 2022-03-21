@@ -1,7 +1,7 @@
 import SvgElement from '../../components/svg-element/svg-element';
 import Header from '../../components/header/header';
 import {Footer} from '../../components/footer/footer';
-import movies from '../../mocks/movies';
+import movies, {getFullMovieInfo} from '../../mocks/movies';
 import MovieCard from '../../components/movie-card/movie-card';
 import {Link, Navigate, useParams} from 'react-router-dom';
 import {player} from '../../routes/routes';
@@ -36,7 +36,7 @@ const tabs: TabItem[] = [
 export default function Movie () {
 
   const {id} = useParams();
-  const movie = movies.find((element) => element.id === Number(id));
+  const movie = getFullMovieInfo(Number(id));
   const [activeTab, setActiveTab] = useState(tabs[0].id);
 
   if (!movie) {
@@ -64,8 +64,8 @@ export default function Movie () {
             <div className="film-card__desc">
               <h2 className="film-card__title">{movie.name}</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">Drama</span>
-                <span className="film-card__year">2014</span>
+                <span className="film-card__genre">{movie.details.genre}</span>
+                <span className="film-card__year">{movie.details.released}</span>
               </p>
 
               <div className="film-card__buttons">
@@ -98,16 +98,23 @@ export default function Movie () {
             </div>
 
             <div className="film-card__desc">
-              <nav className="film-nav film-card__nav">
-                <Tabs
-                  items={tabs}
-                  activeId={activeTab}
-                  onSelect={setActiveTab}
-                />
-              </nav>
-              {activeTab === TABS.Overview && <MovieDescription/>}
-              {activeTab === TABS.Details && <MovieDetails/>}
-              {activeTab === TABS.Reviews && <MovieReviews/>}
+              <Tabs
+                items={tabs}
+                activeId={activeTab}
+                onSelect={setActiveTab}
+              />
+              {
+                activeTab === TABS.Overview
+                && <MovieDescription {...movie.overview}/>
+              }
+              {
+                activeTab === TABS.Details
+                && <MovieDetails />
+              }
+              {
+                activeTab === TABS.Reviews
+                && <MovieReviews />
+              }
             </div>
           </div>
         </div>

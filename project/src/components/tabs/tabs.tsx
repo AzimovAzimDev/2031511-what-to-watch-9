@@ -6,18 +6,20 @@ import {TabsProps} from '../../types/Tabs';
  */
 export default function Tabs({items, activeId, onSelect}: TabsProps) {
   return (
-    <ul className="film-nav__list">
-      {items.map((item, index) => {
-        const key = `tab-${index}`;
-        return (
-          <TabItem
-            key={key}
-            {...item}
-            isActive={activeId === item.id}
-            onSelect={onSelect}
-          />
-        );
-      })}
-    </ul>
+    <nav className="film-nav film-card__nav">
+      <ul className="film-nav__list">
+        {items.map((item, index) => {
+          const key = `tab-${index}`;
+          return (
+            <TabItem
+              key={key}
+              {...item}
+              isActive={activeId === item.id}
+              onSelect={onSelect}
+            />
+          );
+        })}
+      </ul>
+    </nav>
   );
 }
