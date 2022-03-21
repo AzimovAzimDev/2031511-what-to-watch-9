@@ -5,6 +5,21 @@ import movies from '../../mocks/movies';
 import MovieCard from '../../components/movie-card/movie-card';
 import {Link, Navigate, useParams} from 'react-router-dom';
 import {player} from '../../routes/routes';
+import {TabItemProps} from '../../types/Tabs';
+import Tabs from '../../components/tabs/tabs';
+
+const tabs: TabItemProps[] = [
+  {
+    title: 'Overview',
+    to: '/overview',
+  },{
+    title: 'Details',
+    to: '/details',
+  },{
+    title: 'Reviews',
+    to: '/reviews',
+  },
+];
 
 export default function Movie () {
 
@@ -71,17 +86,9 @@ export default function Movie () {
 
             <div className="film-card__desc">
               <nav className="film-nav film-card__nav">
-                <ul className="film-nav__list">
-                  <li className="film-nav__item film-nav__item--active">
-                    <a href="#" className="film-nav__link">Overview</a>
-                  </li>
-                  <li className="film-nav__item">
-                    <a href="#" className="film-nav__link">Details</a>
-                  </li>
-                  <li className="film-nav__item">
-                    <a href="#" className="film-nav__link">Reviews</a>
-                  </li>
-                </ul>
+                <Tabs
+                  items={tabs}
+                />
               </nav>
 
               <div className="film-rating">
