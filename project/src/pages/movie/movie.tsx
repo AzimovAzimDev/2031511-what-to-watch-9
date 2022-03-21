@@ -101,6 +101,7 @@ export default function Movie () {
               <nav className="film-nav film-card__nav">
                 <Tabs
                   items={tabs}
+                  activeId={activeTab}
                   onSelect={setActiveTab}
                 />
               </nav>

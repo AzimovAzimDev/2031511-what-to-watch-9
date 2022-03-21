@@ -10,6 +10,7 @@ export type TabItem = {
  * Элемент вкладки
  */
 export type TabItemProps = TabItem & {
+  isActive: boolean;
   onSelect: (id: string) => void;
 }
 
@@ -18,6 +19,7 @@ export type TabItemProps = TabItem & {
  */
 export type TabsProps = {
   items: TabItem[];
+  activeId: string;
   onSelect: (id: string) => void;
 }
 
