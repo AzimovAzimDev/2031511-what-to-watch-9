@@ -9,8 +9,6 @@ const MoviePreview = forwardRef<HTMLVideoElement, MoviePreviewProps>((x, ref) =>
     ref={ref}
     loop
     muted
-    width="280"
-    height="175"
     poster={`img/${(x.poster)}`}
   >
     <source src={x.preview} type="video/mp4"/>
