@@ -1,5 +1,8 @@
 import {MovieDetails as MovieDetailsProps} from '../../types/MovieDetails';
 
+/**
+ * Компонента для отображения деталей фильма
+ */
 export default function MovieDetails(props: MovieDetailsProps) {
   return(
     <div className="film-card__text film-card__row">

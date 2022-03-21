@@ -1,38 +1,20 @@
+import {useState} from 'react';
+import {Link, Navigate, useParams} from 'react-router-dom';
 import SvgElement from '../../components/svg-element/svg-element';
 import Header from '../../components/header/header';
 import {Footer} from '../../components/footer/footer';
-import movies, {getFullMovieInfo} from '../../mocks/movies';
 import MovieCard from '../../components/movie-card/movie-card';
-import {Link, Navigate, useParams} from 'react-router-dom';
-import {player} from '../../routes/routes';
-import {TabItem} from '../../types/Tabs';
 import Tabs from '../../components/tabs/tabs';
 import MovieDescription from '../../components/movie-description/movie-description';
 import MovieDetails from '../../components/movie-details/movie-details';
 import MovieReviews from '../../components/movie-reviews/movie-reviews';
-import {useState} from 'react';
+import {player} from '../../routes/routes';
+import {TABS, tabs} from '../../constants/tabs';
+import movies, {getFullMovieInfo} from '../../mocks/movies';
 
-enum TABS {
-  Overview = 'overview',
-  Details = 'details',
-  Reviews = 'reviews',
-}
-
-const tabs: TabItem[] = [
-  {
-    title: 'Overview',
-    id: TABS.Overview,
-  },
-  {
-    title: 'Details',
-    id: TABS.Details,
-  },
-  {
-    title: 'Reviews',
-    id: TABS.Reviews,
-  },
-];
-
+/**
+ * Страница фильма
+ */
 export default function Movie () {
 
   const {id} = useParams();
@@ -48,7 +30,6 @@ export default function Movie () {
   return (
     <>
       <SvgElement/>
-
 
       <section className="film-card film-card--full">
         <div className="film-card__hero">

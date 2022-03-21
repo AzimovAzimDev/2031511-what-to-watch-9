@@ -1,7 +1,13 @@
 import {MovieDescription as MovieDescriptionProps} from '../../types/MovieDescriptionProps';
 
+/**
+ * Компонента для отображения описания фильма
+ */
 export default function MovieDescription(props: MovieDescriptionProps) {
-  const getHumanReadibleReview = (rating: number) => {
+  /**
+   * Получаем человекочитаемый вариант отзыва
+   */
+  const getHumanReadableReview = (rating: number) => {
     const ratingMap = new Map<number, string>( [
       [0, 'no reviews'],
       [1, 'The worst'],
@@ -17,14 +23,14 @@ export default function MovieDescription(props: MovieDescriptionProps) {
     ]);
 
     return ratingMap.get(Math.round(Number(rating)));
-
   };
+
   return(
     <>
       <div className="film-rating">
         <div className="film-rating__score">{props.rating}</div>
         <p className="film-rating__meta">
-          <span className="film-rating__level">{getHumanReadibleReview(props.rating)}</span>
+          <span className="film-rating__level">{getHumanReadableReview(props.rating)}</span>
           <span className="film-rating__count">{props.ratingReviews} ratings</span>
         </p>
       </div>

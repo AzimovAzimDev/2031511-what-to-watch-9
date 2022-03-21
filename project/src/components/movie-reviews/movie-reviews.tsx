@@ -1,5 +1,8 @@
 import {MovieReview} from '../../types/MovieReview';
 
+/**
+ * Компонета для отображения отзываов фильма
+ */
 export default function MovieReviews({reviews}: {reviews: MovieReview[] }) {
   return(
     <div className="film-card__reviews film-card__row">

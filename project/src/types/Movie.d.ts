@@ -12,7 +12,9 @@ export type Movie = {
   preview: string;
 }
 
-
+/**
+ * Полная инфомрмация о фильме
+ */
 export type MovieFull = Movie & {
   overview: MovieDescription;
   reviews: MovieReview[];
