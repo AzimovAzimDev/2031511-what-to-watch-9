@@ -6,4 +6,5 @@ export type MovieReview = {
   user: string;
   date: string;
   points: number;
+  id: number
 }

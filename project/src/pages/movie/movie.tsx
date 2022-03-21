@@ -109,11 +109,11 @@ export default function Movie () {
               }
               {
                 activeTab === TABS.Details
-                && <MovieDetails />
+                && <MovieDetails  {...movie.details}/>
               }
               {
                 activeTab === TABS.Reviews
-                && <MovieReviews />
+                && <MovieReviews reviews={movie.reviews}/>
               }
             </div>
           </div>

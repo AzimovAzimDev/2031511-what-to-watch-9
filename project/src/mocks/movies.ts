@@ -139,6 +139,7 @@ export const getFullMovieInfo = (id: number): MovieFull => ({
       user: 'Kate Muir',
       date: 'December 24, 2016',
       points: 8.9,
+      id: 1,
     },
   ],
   details: {
