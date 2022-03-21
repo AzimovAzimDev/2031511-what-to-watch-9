@@ -1,12 +1,22 @@
 import {MoviePreviewProps} from '../../types/MoviePreviewProps';
+import {forwardRef} from 'react';
 
 /**
  * Превью проигрыватель для карточки фильма
  */
-export default function MoviePreview (props: MoviePreviewProps) {
-  return (
-    <video width="280" height="175" loop muted poster={`img/${props.poster}`}>
-      <source src={props.preview} type="video/mp4"/>
-    </video>
-  );
-}
+const MoviePreview = forwardRef<HTMLVideoElement, MoviePreviewProps>((x, ref) => (
+  <video
+    ref={ref}
+    loop
+    muted
+    width="280"
+    height="175"
+    poster={`img/${(x.poster)}`}
+  >
+    <source src={x.preview} type="video/mp4"/>
+  </video>
+) );
+
+MoviePreview.displayName = 'MoviePreview';
+
+export default  MoviePreview;

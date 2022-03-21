@@ -1,7 +1,8 @@
-import {Movie} from '../../types/Movie';
+import {useEffect, useRef} from 'react';
 import {Link} from 'react-router-dom';
 import {movie} from '../../routes/routes';
 import MoviePreview from '../movie-preview/movie-preview';
+import {Movie} from '../../types/Movie';
 
 /**
  * Карточка фильма
@@ -9,18 +10,57 @@ import MoviePreview from '../movie-preview/movie-preview';
  * @constructor
  */
 function MovieCard(props: Movie): JSX.Element {
-  return (
-    <article className="small-film-card catalog__films-card">
+  const card = useRef<HTMLElement>(null);
+  const video = useRef<HTMLVideoElement>(null);
+  let timer:  ReturnType<typeof setTimeout> | null = null;
 
-      <Link to={movie.buildRoute(props.id)}>
+  /**
+   * Обрботчик события принаведение на карточку
+   */
+  const handleMouseOver = () => {
+    timer = setTimeout(()=>{video?.current?.play();}, 1000);
+  };
+
+  /**
+   * Обработчик события при снятии наведения с карточки
+   */
+  const handleMouseLeave = () => {
+    video?.current?.load();
+
+    if (timer) {
+      clearTimeout(timer);
+      timer = null;
+    }
+  };
+
+  /**
+   * Создаем слушатели для воспроизведения превью
+   */
+  useEffect(() => {
+    card?.current?.addEventListener('mouseenter', handleMouseOver);
+    card?.current?.addEventListener('mouseleave', handleMouseLeave);
+
+    return () => {
+      card?.current?.removeEventListener('mouseover', handleMouseOver);
+      card?.current?.addEventListener('mouseleave', handleMouseLeave);
+    };
+  });
+
+  return (
+    <article
+      ref={card}
+      className="small-film-card catalog__films-card"
+    >
+      <Link to={movie.buildRoute(props.id)} className="small-film-card__link">
         <div className="small-film-card__image">
           <MoviePreview
+            ref={video}
             poster={props.image}
             preview={props.preview}
           />
         </div>
         <h3 className="small-film-card__title">
-          <a className="small-film-card__link" href="film-page.html">{ props.name }</a>
+          { props.name }
         </h3>
       </Link>
     </article>
