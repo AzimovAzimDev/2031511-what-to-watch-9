@@ -1,4 +1,3 @@
-import {Link} from 'react-router-dom';
 import {TabItemProps} from '../../types/Tabs';
 
 /**
@@ -7,13 +6,14 @@ import {TabItemProps} from '../../types/Tabs';
 export default function TabItem(props: TabItemProps) {
   return (
     //film-nav__item--active
-    <li className="film-nav__item">
-      <Link
-        to={props.to}
+    <li
+      className="film-nav__item"
+      onClick={() => { props.onSelect(props.id);} }
+    >
+      <span
         className="film-nav__link"
-
       >
         {props.title}
-      </Link>
+      </span>
     </li>);
 }

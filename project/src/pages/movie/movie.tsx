@@ -5,19 +5,31 @@ import movies from '../../mocks/movies';
 import MovieCard from '../../components/movie-card/movie-card';
 import {Link, Navigate, useParams} from 'react-router-dom';
 import {player} from '../../routes/routes';
-import {TabItemProps} from '../../types/Tabs';
+import {TabItem} from '../../types/Tabs';
 import Tabs from '../../components/tabs/tabs';
+import MovieDescription from '../../components/movie-description/movie-description';
+import MovieDetails from '../../components/movie-details/movie-details';
+import MovieReviews from '../../components/movie-reviews/movie-reviews';
+import {useState} from 'react';
 
-const tabs: TabItemProps[] = [
+enum TABS {
+  Overview = 'overview',
+  Details = 'details',
+  Reviews = 'reviews',
+}
+
+const tabs: TabItem[] = [
   {
     title: 'Overview',
-    to: '/overview',
-  },{
+    id: TABS.Overview,
+  },
+  {
     title: 'Details',
-    to: '/details',
-  },{
+    id: TABS.Details,
+  },
+  {
     title: 'Reviews',
-    to: '/reviews',
+    id: TABS.Reviews,
   },
 ];
 
@@ -25,6 +37,7 @@ export default function Movie () {
 
   const {id} = useParams();
   const movie = movies.find((element) => element.id === Number(id));
+  const [activeTab, setActiveTab] = useState(tabs[0].id);
 
   if (!movie) {
     return <Navigate to="404" />;
@@ -88,36 +101,12 @@ export default function Movie () {
               <nav className="film-nav film-card__nav">
                 <Tabs
                   items={tabs}
+                  onSelect={setActiveTab}
                 />
               </nav>
-
-              <div className="film-rating">
-                <div className="film-rating__score">8,9</div>
-                <p className="film-rating__meta">
-                  <span className="film-rating__level">Very good</span>
-                  <span className="film-rating__count">240 ratings</span>
-                </p>
-              </div>
-
-              <div className="film-card__text">
-                <p>In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge
-                    Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave`s friend and protege.
-                </p>
-
-                <p>Gustave prides himself on providing first-class service to the hotel`s guests, including satisfying
-                    the sexual needs of the many elderly women who stay there. When one of Gustave`s lovers dies
-                    mysteriously, Gustave finds himself the recipient of a priceless painting and the chief suspect in
-                    her murder.
-                </p>
-
-                <p className="film-card__director"><strong>Director: Wes Anderson</strong></p>
-
-                <p className="film-card__starring">
-                  <strong>Starring: Bill Murray, Edward Norton, Jude Law, Willem
-                    Dafoe and other
-                  </strong>
-                </p>
-              </div>
+              {activeTab === TABS.Overview && <MovieDescription/>}
+              {activeTab === TABS.Details && <MovieDetails/>}
+              {activeTab === TABS.Reviews && <MovieReviews/>}
             </div>
           </div>
         </div>

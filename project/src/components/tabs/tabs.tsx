@@ -4,7 +4,7 @@ import {TabsProps} from '../../types/Tabs';
 /**
  * Компонента для отображения вкладок/табок фильма
  */
-export default function Tabs({items}: TabsProps) {
+export default function Tabs({items, onSelect}: TabsProps) {
   return (
     <ul className="film-nav__list">
       {items.map((item, index) => {
@@ -13,6 +13,7 @@ export default function Tabs({items}: TabsProps) {
           <TabItem
             key={key}
             {...item}
+            onSelect={onSelect}
           />
         );
       })}
