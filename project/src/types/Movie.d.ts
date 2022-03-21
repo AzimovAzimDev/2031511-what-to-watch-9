@@ -10,6 +10,7 @@ export type Movie = {
   name: string;
   image: string;
   preview: string;
+  genre: string;
 }
 
 /**

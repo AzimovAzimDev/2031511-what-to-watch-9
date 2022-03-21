@@ -106,11 +106,13 @@ export default function Movie () {
 
           <div className="catalog__films-list">
             {
-              movies.slice(0, 4).map((m) => (
-                <MovieCard
-                  key={`movie${m.id}`}
-                  {...m}
-                /> ))
+              movies
+                .filter((m) => m.genre === movie.genre)
+                .slice(0, 4).map((m) => (
+                  <MovieCard
+                    key={`movie${m.id}`}
+                    {...m}
+                  /> ))
             }
           </div>
         </section>
