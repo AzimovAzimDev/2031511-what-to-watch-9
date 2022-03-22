@@ -1,20 +1,34 @@
-import SvgElement from '../../components/svg-element/svg-element';
-import {Footer} from '../../components/footer/footer';
-import {MoviePageProps} from '../../types/MoviePage';
-import Header from '../../components/header/header';
-import {MovieList} from '../../components/movie-list/movie-list';
-import Tabs from '../../components/tabs/tabs';
-import genre from '../../mocks/genre';
-import TabItem from '../../components/tabs/tab-item';
+import SvgElement from 'components/svg-element/svg-element';
+import {Footer} from 'components/footer/footer';
+import Header from 'components/header/header';
+import {MovieList} from 'components/movie-list/movie-list';
+import Tabs from 'components/tabs/tabs';
+import TabItem from 'components/tabs/tab-item';
+import {MoviePageProps} from 'types/MoviePage';
+import genre from 'mocks/genre';
+
+import {useAppDispatch, useAppSelector} from 'hooks/index';
+import {setGenre} from 'store/action';
+
+
 /**
  * Главная страница
  */
 function Home(props: MoviePageProps): JSX.Element {
-  const activeTab = 'all_genres';
+  const activeGenre = useAppSelector((state) => state.genre);
+  const movies = useAppSelector((state) => {
+    if (activeGenre === 'all_genres') {
+      return state.movies;
+    }
+
+    return  state.movies.filter((movie) => movie.genre === activeGenre);
+  });
+  const dispatch = useAppDispatch();
+
   const handleSelectGenre = (key: string) => {
-    // eslint-disable-next-line no-console
-    console.log(key);
+    dispatch(setGenre(key));
   };
+
   return (
     <>
       <SvgElement/>
@@ -76,14 +90,14 @@ function Home(props: MoviePageProps): JSX.Element {
                 <TabItem
                   key={key}
                   {...item}
-                  className={`catalog__genres-item catalog__genres-link ${activeTab === item.id && 'catalog__genres-item--active'}`}
+                  className={`catalog__genres-item catalog__genres-link ${activeGenre === item.id && 'catalog__genres-item--active'}`}
                   onSelect={handleSelectGenre}
                 />
               );
             })}
           </Tabs>
 
-          <MovieList list={props.list}/>
+          <MovieList list={movies}/>
 
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>

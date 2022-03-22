@@ -1,9 +1,17 @@
 import {createReducer} from '@reduxjs/toolkit';
-import {setGenre} from './actions';
-import initialState from './state';
+import {setGenre} from 'store/action';
+import movies from 'mocks/movies';
 
-export default createReducer(initialState, (builder) => {
-  builder.addCase(setGenre, (state, action) => {
-    state.genre = action.payload;
-  });
+const initialState = {
+  genre: 'all_genres',
+  movies,
+};
+
+const reducer = createReducer(initialState, (builder) => {
+  builder
+    .addCase(setGenre, (state, action) => {
+      state.genre = action.payload;
+    });
 });
+
+export {reducer};
