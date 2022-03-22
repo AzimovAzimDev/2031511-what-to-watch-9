@@ -3,11 +3,18 @@ import {Footer} from '../../components/footer/footer';
 import {MoviePageProps} from '../../types/MoviePage';
 import Header from '../../components/header/header';
 import {MovieList} from '../../components/movie-list/movie-list';
-
+import Tabs from '../../components/tabs/tabs';
+import genre from '../../mocks/genre';
+import TabItem from '../../components/tabs/tab-item';
 /**
  * Главная страница
  */
 function Home(props: MoviePageProps): JSX.Element {
+  const activeTab = 'all_genres';
+  const handleSelectGenre = (key: string) => {
+    // eslint-disable-next-line no-console
+    console.log(key);
+  };
   return (
     <>
       <SvgElement/>
@@ -62,38 +69,19 @@ function Home(props: MoviePageProps): JSX.Element {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-          <ul className="catalog__genres-list">
-            <li className="catalog__genres-item catalog__genres-item--active">
-              <a href="#" className="catalog__genres-link">All genres</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Comedies</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Crime</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Documentary</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Dramas</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Horror</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Kids & Family</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Romance</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Sci-Fi</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Thrillers</a>
-            </li>
-          </ul>
+          <Tabs className="catalog__genres-list">
+            {genre.map((item, index) => {
+              const key = `tab-${index}`;
+              return (
+                <TabItem
+                  key={key}
+                  {...item}
+                  className={`catalog__genres-item catalog__genres-link ${activeTab === item.id && 'catalog__genres-item--active'}`}
+                  onSelect={handleSelectGenre}
+                />
+              );
+            })}
+          </Tabs>
 
           <MovieList list={props.list}/>
 

@@ -4,42 +4,42 @@
 export default [
   {
     title: 'All genres',
-    key: 'all_genres',
+    id: 'all_genres',
   },
   {
     title: 'Comedies',
-    key: 'comedies',
+    id: 'comedies',
   },
   {
     title: 'Crime',
-    key: 'crime',
+    id: 'crime',
   },
   {
     title: 'Documentary',
-    key: 'documentary',
+    id: 'documentary',
   },
   {
     title: 'Dramas',
-    key: 'dramas',
+    id: 'dramas',
   },
   {
     title: 'Horror',
-    key: 'horror',
+    id: 'horror',
   },
   {
-    title: 'Kids &amp; Family',
-    key: 'kids_family',
+    title: 'Kids & Family',
+    id: 'kids_family',
   },
   {
     title: 'Romance',
-    key: 'romance',
+    id: 'romance',
   },
   {
     title: 'Sci-Fi',
-    key: 'sci_fi',
+    id: 'sci_fi',
   },
   {
     title: 'Thrillers',
-    key: 'thrillers',
+    id: 'thrillers',
   },
 ];

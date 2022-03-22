@@ -11,6 +11,7 @@ import MovieReviews from '../../components/movie-reviews/movie-reviews';
 import {player} from '../../routes/routes';
 import {TABS, tabs} from '../../constants/tabs';
 import movies, {getFullMovieInfo} from '../../mocks/movies';
+import TabItem from '../../components/tabs/tab-item';
 
 /**
  * Страница фильма
@@ -79,11 +80,21 @@ export default function Movie () {
             </div>
 
             <div className="film-card__desc">
-              <Tabs
-                items={tabs}
-                activeId={activeTab}
-                onSelect={setActiveTab}
-              />
+              <nav className="film-nav film-card__nav">
+                <Tabs className="film-nav__list">
+                  {tabs.map((item, index) => {
+                    const key = `tab-${index}`;
+                    return (
+                      <TabItem
+                        key={key}
+                        {...item}
+                        className={`film-nav__item film-nav__link  ${activeTab === item.id && 'film-nav__item--active'}`}
+                        onSelect={setActiveTab}
+                      />
+                    );
+                  })}
+                </Tabs>
+              </nav>
               {
                 activeTab === TABS.Overview
                 && <MovieDescription {...movie.overview}/>
