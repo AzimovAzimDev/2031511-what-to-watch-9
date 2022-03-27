@@ -44,7 +44,7 @@ function MovieCard(props: Movie): JSX.Element {
       card?.current?.removeEventListener('mouseover', handleMouseOver);
       card?.current?.addEventListener('mouseleave', handleMouseLeave);
     };
-  });
+  }, []);
 
   return (
     <article

@@ -1,15 +1,25 @@
+import {useState} from 'react';
+import {Link, Navigate, useParams} from 'react-router-dom';
 import SvgElement from '../../components/svg-element/svg-element';
 import Header from '../../components/header/header';
 import {Footer} from '../../components/footer/footer';
-import movies from '../../mocks/movies';
 import MovieCard from '../../components/movie-card/movie-card';
-import {Link, Navigate, useParams} from 'react-router-dom';
+import Tabs from '../../components/tabs/tabs';
+import MovieDescription from '../../components/movie-description/movie-description';
+import MovieDetails from '../../components/movie-details/movie-details';
+import MovieReviews from '../../components/movie-reviews/movie-reviews';
 import {player} from '../../routes/routes';
+import {TABS, tabs} from '../../constants/tabs';
+import movies, {getFullMovieInfo} from '../../mocks/movies';
 
+/**
+ * Страница фильма
+ */
 export default function Movie () {
 
   const {id} = useParams();
-  const movie = movies.find((element) => element.id === Number(id));
+  const movie = getFullMovieInfo(Number(id));
+  const [activeTab, setActiveTab] = useState(tabs[0].id);
 
   if (!movie) {
     return <Navigate to="404" />;
@@ -20,7 +30,6 @@ export default function Movie () {
   return (
     <>
       <SvgElement/>
-
 
       <section className="film-card film-card--full">
         <div className="film-card__hero">
@@ -36,8 +45,8 @@ export default function Movie () {
             <div className="film-card__desc">
               <h2 className="film-card__title">{movie.name}</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">Drama</span>
-                <span className="film-card__year">2014</span>
+                <span className="film-card__genre">{movie.details.genre}</span>
+                <span className="film-card__year">{movie.details.released}</span>
               </p>
 
               <div className="film-card__buttons">
@@ -70,47 +79,23 @@ export default function Movie () {
             </div>
 
             <div className="film-card__desc">
-              <nav className="film-nav film-card__nav">
-                <ul className="film-nav__list">
-                  <li className="film-nav__item film-nav__item--active">
-                    <a href="#" className="film-nav__link">Overview</a>
-                  </li>
-                  <li className="film-nav__item">
-                    <a href="#" className="film-nav__link">Details</a>
-                  </li>
-                  <li className="film-nav__item">
-                    <a href="#" className="film-nav__link">Reviews</a>
-                  </li>
-                </ul>
-              </nav>
-
-              <div className="film-rating">
-                <div className="film-rating__score">8,9</div>
-                <p className="film-rating__meta">
-                  <span className="film-rating__level">Very good</span>
-                  <span className="film-rating__count">240 ratings</span>
-                </p>
-              </div>
-
-              <div className="film-card__text">
-                <p>In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge
-                    Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave`s friend and protege.
-                </p>
-
-                <p>Gustave prides himself on providing first-class service to the hotel`s guests, including satisfying
-                    the sexual needs of the many elderly women who stay there. When one of Gustave`s lovers dies
-                    mysteriously, Gustave finds himself the recipient of a priceless painting and the chief suspect in
-                    her murder.
-                </p>
-
-                <p className="film-card__director"><strong>Director: Wes Anderson</strong></p>
-
-                <p className="film-card__starring">
-                  <strong>Starring: Bill Murray, Edward Norton, Jude Law, Willem
-                    Dafoe and other
-                  </strong>
-                </p>
-              </div>
+              <Tabs
+                items={tabs}
+                activeId={activeTab}
+                onSelect={setActiveTab}
+              />
+              {
+                activeTab === TABS.Overview
+                && <MovieDescription {...movie.overview}/>
+              }
+              {
+                activeTab === TABS.Details
+                && <MovieDetails  {...movie.details}/>
+              }
+              {
+                activeTab === TABS.Reviews
+                && <MovieReviews reviews={movie.reviews}/>
+              }
             </div>
           </div>
         </div>
@@ -121,11 +106,13 @@ export default function Movie () {
 
           <div className="catalog__films-list">
             {
-              movies.slice(0, 4).map((m) => (
-                <MovieCard
-                  key={`movie${m.id}`}
-                  {...m}
-                /> ))
+              movies
+                .filter((m) => m.genre === movie.genre)
+                .slice(0, 4).map((m) => (
+                  <MovieCard
+                    key={`movie${m.id}`}
+                    {...m}
+                  /> ))
             }
           </div>
         </section>
