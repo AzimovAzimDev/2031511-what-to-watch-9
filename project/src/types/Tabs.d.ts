@@ -1,6 +1,8 @@
 /**
  * Элемент вкладки
  */
+import {JSXElementConstructor} from 'react';
+
 export type TabItem = {
   id: string;
   title: string;
@@ -10,16 +12,14 @@ export type TabItem = {
  * Элемент вкладки
  */
 export type TabItemProps = TabItem & {
-  isActive: boolean;
+  className?: string;
   onSelect: (id: string) => void;
 }
 
 /**
  * Парамерты для вкладок фильма
  */
-export type TabsProps = {
-  items: TabItem[];
-  activeId: string;
-  onSelect: (id: string) => void;
+export type TabsProps = JSXElementConstructor & {
+  className?: string;
 }
 

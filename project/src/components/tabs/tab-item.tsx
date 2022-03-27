@@ -6,12 +6,10 @@ import {TabItemProps} from '../../types/Tabs';
 export default function TabItem(props: TabItemProps) {
   return (
     <li
-      className={`film-nav__item  ${props.isActive && 'film-nav__item--active'}`}
+      className={props.className}
       onClick={() => { props.onSelect(props.id);} }
     >
-      <span
-        className="film-nav__link"
-      >
+      <span >
         {props.title}
       </span>
     </li>);
